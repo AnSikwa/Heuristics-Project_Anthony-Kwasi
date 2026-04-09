@@ -6,6 +6,11 @@ Runs A*, IDA*, and BFS on 3x3 puzzles scrambled at depths 10, 20, 30, 50, 75.
 
 import json, math, time, random, heapq
 from collections import deque
+from pathlib import Path
+
+ROOT     = Path(__file__).parent
+DATA_DIR = ROOT / "data"
+DATA_DIR.mkdir(exist_ok=True)
 
 # ── Reuse core functions from solver.py ──────────────────
 
@@ -138,6 +143,6 @@ for sd in SCRAMBLE_DEPTHS:
         mean_d = sum(ds)/len(ds) if ds else 0
         print(f"  {algo:8s}: solved={solved}/{NUM_INSTANCES}  nodes_mean={mean_n:,.0f}  depth_mean={mean_d:.1f}")
 
-with open("/home/user/workspace/cs57200/depth_scaling_results.json", "w") as f:
+with open(DATA_DIR / "depth_scaling_results.json", "w") as f:
     json.dump(results, f, indent=2)
 print("\nSaved to depth_scaling_results.json")

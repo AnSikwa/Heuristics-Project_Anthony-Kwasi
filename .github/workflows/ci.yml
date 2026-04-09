@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  lint-and-check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Check syntax (py_compile)
+        run: |
+          python -m py_compile solver.py
+          python -m py_compile depth_scaling.py
+          python -m py_compile depth_scaling_4x4.py
+          python -m py_compile make_charts.py
+          python -m py_compile depth_scaling_charts.py
+          python -m py_compile depth_scaling_4x4_charts.py
+          python -m py_compile make_report.py
+          python -m py_compile make_depth_report.py
+          python -m py_compile make_4x4_depth_report.py
+
+      - name: Smoke-test core solver (no I/O)
+        run: |
+          python - <<'EOF'
+          from solver import (
+              goal_state, blank_index, neighbors,
+              manhattan_distance, generate_solvable_instance,
+              bfs, astar, idastar
+          )
+          import random
+
+          # Verify goal detection
+          assert goal_state(3) == (1, 2, 3, 4, 5, 6, 7, 8, 0)
+          assert goal_state(2) == (1, 2, 3, 0)
+
+          # Verify solvers find simple instances quickly
+          rng = random.Random(0)
+          inst = generate_solvable_instance(3, rng, 5)
+          assert bfs(inst, 3)["found"]
+          assert astar(inst, 3)["found"]
+          assert idastar(inst, 3)["found"]
+          print("All smoke tests passed.")
+          EOF

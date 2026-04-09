@@ -14,6 +14,12 @@ from reportlab.platypus import (
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 
+ROOT        = Path(__file__).parent
+DATA_DIR    = ROOT / "data"
+CHARTS_DIR  = ROOT / "charts"
+REPORTS_DIR = ROOT / "reports"
+REPORTS_DIR.mkdir(exist_ok=True)
+
 # ── Fonts ────────────────────────────────────────────────
 FONT_DIR = Path("/tmp/fonts"); FONT_DIR.mkdir(exist_ok=True)
 def dl(url, name):
@@ -75,7 +81,7 @@ def header_footer(cv, doc):
     cv.restoreState()
 
 # ── Data ─────────────────────────────────────────────────
-with open("/home/user/workspace/cs57200/depth_scaling_results.json") as f:
+with open(DATA_DIR / "depth_scaling_results.json") as f:
     raw = json.load(f)
 
 DEPTHS = [10, 20, 30, 50, 75]
@@ -126,7 +132,7 @@ def results_table():
     return t
 
 # ── Story ─────────────────────────────────────────────────
-C = "/home/user/workspace/cs57200/charts/"
+C = str(CHARTS_DIR) + "/"
 story = []
 
 # Cover
@@ -309,7 +315,7 @@ story += [
 ]
 
 # ── Build ─────────────────────────────────────────────────
-OUT = "/home/user/workspace/cs57200/CS57200_DepthScaling_Extension.pdf"
+OUT = str(REPORTS_DIR / "CS57200_DepthScaling_Extension.pdf")
 doc = SimpleDocTemplate(OUT, pagesize=letter,
     title="CS 57200 – Depth-Scaling Extension: A* Node Expansions vs. Solution Depth",
     author="Perplexity Computer",

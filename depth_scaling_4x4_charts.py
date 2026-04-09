@@ -1,13 +1,17 @@
 """Charts for the 4x4 depth-scaling experiment."""
 
-import json, numpy as np, math, os
+import json, numpy as np, math
+from pathlib import Path
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 import matplotlib.patches as mpatches
 
-os.makedirs("/home/user/workspace/cs57200/charts4x4", exist_ok=True)
+ROOT         = Path(__file__).parent
+DATA_DIR     = ROOT / "data"
+CHARTS4_DIR  = ROOT / "charts4x4"
+CHARTS4_DIR.mkdir(exist_ok=True)
 
 TEAL  = "#20808D"; RUST  = "#A84B2F"; DARK  = "#1B474D"
 GOLD  = "#E8AF34"; BG    = "#F7F6F2"; TEXT  = "#28251D"
@@ -23,7 +27,7 @@ plt.rcParams.update({
 })
 FW, FH = 6.857, 4.0   # ratio ≈ 1.714 to match 6×3.5in PDF embed
 
-with open("/home/user/workspace/cs57200/depth_scaling_4x4_results.json") as f:
+with open(DATA_DIR / "depth_scaling_4x4_results.json") as f:
     raw = json.load(f)
 
 DEPTHS = sorted(raw.keys(), key=int)
@@ -69,7 +73,7 @@ ax.set_xticks(DEPTHS_INT)
 ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"{x:,.0f}"))
 ax.legend(loc="upper left"); ax.grid(True, which="both"); ax.set_axisbelow(True)
 plt.tight_layout()
-plt.savefig("/home/user/workspace/cs57200/charts4x4/chart1_nodes_log.png",
+plt.savefig(CHARTS4_DIR / "chart1_nodes_log.png",
             bbox_inches="tight", pad_inches=0.05)
 plt.close(); print("Chart 1 saved.")
 
@@ -100,7 +104,7 @@ handles = [mpatches.Patch(color=TEAL, label="A* uses fewer nodes"),
 ax.legend(handles=handles, fontsize=8.5)
 ax.yaxis.grid(True); ax.set_axisbelow(True)
 plt.tight_layout()
-plt.savefig("/home/user/workspace/cs57200/charts4x4/chart2_ratio.png",
+plt.savefig(CHARTS4_DIR / "chart2_ratio.png",
             bbox_inches="tight", pad_inches=0.05)
 plt.close(); print("Chart 2 saved.")
 
@@ -129,7 +133,7 @@ ax.set_title("Mean Runtime vs. Scramble Depth — 4×4 Puzzle")
 ax.set_xticks(DEPTHS_INT)
 ax.legend(); ax.yaxis.grid(True); ax.set_axisbelow(True)
 plt.tight_layout()
-plt.savefig("/home/user/workspace/cs57200/charts4x4/chart3_runtime.png",
+plt.savefig(CHARTS4_DIR / "chart3_runtime.png",
             bbox_inches="tight", pad_inches=0.05)
 plt.close(); print("Chart 3 saved.")
 
@@ -169,7 +173,7 @@ ax.set_title("Solution Depth Distribution by Scramble Level — 4×4 Puzzle")
 ax.legend(fontsize=8, loc="upper left")
 ax.yaxis.grid(True); ax.set_axisbelow(True)
 plt.tight_layout()
-plt.savefig("/home/user/workspace/cs57200/charts4x4/chart4_depth_violin.png",
+plt.savefig(CHARTS4_DIR / "chart4_depth_violin.png",
             bbox_inches="tight", pad_inches=0.05)
 plt.close(); print("Chart 4 saved.")
 
@@ -197,13 +201,13 @@ ax.set_title("Solve Rate: A* vs IDA* — 4×4 Puzzle\n(IDA* node limit: 200K–1
 ax.set_xticks(DEPTHS_INT)
 ax.legend(); ax.yaxis.grid(True); ax.set_axisbelow(True)
 plt.tight_layout()
-plt.savefig("/home/user/workspace/cs57200/charts4x4/chart5_solverate.png",
+plt.savefig(CHARTS4_DIR / "chart5_solverate.png",
             bbox_inches="tight", pad_inches=0.05)
 plt.close(); print("Chart 5 saved.")
 
 # ── Side-by-side comparison: 3x3 vs 4x4 depth saturation ──────────────────
 # Load 3x3 data too
-with open("/home/user/workspace/cs57200/depth_scaling_results.json") as f:
+with open(DATA_DIR / "depth_scaling_results.json") as f:
     raw3 = json.load(f)
 
 DEPTHS3 = [10, 20, 30, 50, 75]
@@ -238,7 +242,7 @@ ax.set_title("Depth Saturation: 3×3 vs 4×4 Puzzle by Scramble Level")
 ax.set_xticks(sorted(set(DEPTHS3+DEPTHS4)))
 ax.legend(fontsize=9); ax.yaxis.grid(True); ax.set_axisbelow(True)
 plt.tight_layout()
-plt.savefig("/home/user/workspace/cs57200/charts4x4/chart6_saturation_comparison.png",
+plt.savefig(CHARTS4_DIR / "chart6_saturation_comparison.png",
             bbox_inches="tight", pad_inches=0.05)
 plt.close(); print("Chart 6 saved.")
 
