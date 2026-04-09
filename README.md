@@ -1,99 +1,85 @@
-# CS 57200 – Phase 2: Sliding Tile Puzzle Solver
-**Purdue University · Track B: Search & Optimization**  
-**Project:** Heuristic A\* Search for Large Sliding Puzzles Using Advanced Heuristics  
+# CS 57200 – Milestone 2 Submission
+**Heuristic A* Search for Large Sliding Puzzles Using Advanced Heuristics**
 
-
----
-
-## Quick Start
-
-### Prerequisites
-- Python 3.10 or higher
-
-### Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-> **Tip:** Use a virtual environment to keep dependencies isolated:
-> ```bash
-> python -m venv .venv
-> source .venv/bin/activate   # Windows: .venv\Scripts\activate
-> pip install -r requirements.txt
-> ```
+- **Course:** CS 57200: Heuristic Problem Solving, Purdue University
+- **Track:** B — Search & Optimization
+- **Student:** Akwasi (akwasi@usiu.ac.ke)
+- **Due:** April 9, 2026 via Brightspace
 
 ---
 
-## Files
+## Submission Contents
 
-| File | Purpose |
-|------|---------|
-| `solver.py` | Core solvers (BFS, A\*, IDA\*) + Phase 2 experiment runner |
-| `make_charts.py` | Phase 2 charts (5 charts → `charts/`) |
-| `make_report.py` | Phase 2 PDF report generator |
-| `depth_scaling.py` | 3×3 depth-scaling experiment (scrambles 10/20/30/50/75) |
-| `depth_scaling_charts.py` | 3×3 depth-scaling charts (5 charts → `charts/`) |
-| `make_depth_report.py` | 3×3 depth-scaling PDF report generator |
-| `depth_scaling_4x4.py` | 4×4 depth-scaling experiment (scrambles 10/20/30/50) |
-| `depth_scaling_4x4_charts.py` | 4×4 depth-scaling charts (6 charts → `charts4x4/`) |
-| `make_4x4_depth_report.py` | 4×4 depth-scaling PDF report generator |
+### Reports (PDF)
+| File | Description |
+|------|-------------|
+| `CS57200_Phase2_Report.pdf` | **Main Milestone 2 report** — BFS vs A* vs IDA* on 3×3 and 4×4 puzzles, 100 instances each, 5 comparison charts, results tables, and analysis (10 pages) |
+| `CS57200_DepthScaling_Extension.pdf` | **Extension A** — 3×3 scramble-depth sweep (depths 10/20/30/50/75), showing depth saturation at ~21 moves and 54–56× heuristic gain over BFS (6 pages) |
+| `CS57200_4x4_DepthScaling.pdf` | **Extension B** — 4×4 scramble-depth sweep (depths 10/20/30/50), showing A*/IDA* crossover at solution depth ~22–25 and absence of depth saturation (7 pages) |
 
-Output directories are created automatically when each script runs:
-
-| Directory | Contents |
-|-----------|----------|
-| `data/` | JSON result files (`raw_results.json`, `summary.json`, etc.) |
-| `charts/` | Phase 2 and 3×3 depth-scaling PNG charts |
-| `charts4x4/` | 4×4 depth-scaling PNG charts |
-| `reports/` | Generated PDF reports |
+### Source Code (Python)
+| File | Description |
+|------|-------------|
+| `solver.py` | **Core module** — BFS, A*, and IDA* solvers; puzzle instance generator; Phase 2 experiment runner (100 instances per size, seed=42) |
+| `make_charts.py` | Generates 5 Phase 2 comparison charts (nodes, runtime, depth scatter) |
+| `make_report.py` | Generates `CS57200_Phase2_Report.pdf` from results data and charts |
+| `depth_scaling.py` | 3×3 depth-scaling experiment runner — scrambles 10/20/30/50/75, 50 instances each, seed=99 |
+| `depth_scaling_charts.py` | Generates 5 charts for the 3×3 depth-scaling extension |
+| `make_depth_report.py` | Generates `CS57200_DepthScaling_Extension.pdf` |
+| `depth_scaling_4x4.py` | 4×4 depth-scaling experiment runner — scrambles 10/20/30/50, 50 instances each, seed=77; saves results incrementally |
+| `depth_scaling_4x4_charts.py` | Generates 6 charts for the 4×4 depth-scaling extension |
+| `make_4x4_depth_report.py` | Generates `CS57200_4x4_DepthScaling.pdf` |
 
 ---
 
-## Reproduction
+## Reproducing the Results
 
-### Step 1 – Run Phase 2 main experiment
-Generates `data/raw_results.json` and `data/summary.json`.
-```bash
-python solver.py
+### Requirements
+```
+Python 3.9+
+pip install reportlab matplotlib numpy
 ```
 
-### Step 2 – Generate Phase 2 charts
+### Run Order
 ```bash
-python make_charts.py
-```
+# Phase 2 main experiment
+python solver.py                    # → raw_results.json, summary.json
+python make_charts.py               # → charts/chart1–5.png
+python make_report.py               # → CS57200_Phase2_Report.pdf
 
-### Step 3 – Generate Phase 2 PDF report
-```bash
-python make_report.py
-```
+# 3×3 depth-scaling extension
+python depth_scaling.py             # → depth_scaling_results.json
+python depth_scaling_charts.py      # → charts/chartA–E.png
+python make_depth_report.py         # → CS57200_DepthScaling_Extension.pdf
 
-### Step 4 – Run 3×3 depth-scaling experiment
-```bash
-python depth_scaling.py
-```
-
-### Step 5 – Generate 3×3 depth-scaling charts and report
-```bash
-python depth_scaling_charts.py
-python make_depth_report.py
-```
-
-### Step 6 – Run 4×4 depth-scaling experiment
-```bash
-python depth_scaling_4x4.py
-```
-> Note: scramble depth 75 will time out (expected — IDA* intractable at that depth with Manhattan-only heuristic). Results for depths 10/20/30/50 are saved incrementally.
-
-### Step 7 – Generate 4×4 charts and report
-```bash
-python depth_scaling_4x4_charts.py
-python make_4x4_depth_report.py
+# 4×4 depth-scaling extension
+python depth_scaling_4x4.py         # → depth_scaling_4x4_results.json
+                                    #   (scramble-75 will time out — expected;
+                                    #    results for depths 10/20/30/50 save incrementally)
+python depth_scaling_4x4_charts.py  # → charts4x4/chart1–6.png
+python make_4x4_depth_report.py     # → CS57200_4x4_DepthScaling.pdf
 ```
 
 ---
 
-## Seeds
+## Design Summary
+
+### State Representation
+- Immutable Python `tuple` of length n² (n=3 or n=4)
+- Tile `0` represents the blank; goal state = `(1, 2, …, n²-1, 0)`
+
+### Instance Generation
+- Random walks from the goal state (parent state excluded to avoid back-tracking)
+- Guarantees solvability by construction; reproducible via fixed seeds
+
+### Algorithms
+| Algorithm | Strategy | Heuristic |
+|-----------|----------|-----------|
+| BFS | FIFO + visited dict | None |
+| A* | Lazy-deletion heap + g-cost map | Manhattan distance |
+| IDA* | Iterative deepening DFS on f-bound | Manhattan distance |
+
+### Reproducibility Seeds
 | Experiment | Seed |
 |-----------|------|
 | Phase 2 (100 instances per size) | 42 |
@@ -102,35 +88,10 @@ python make_4x4_depth_report.py
 
 ---
 
-## Key Design Decisions
+## Key Findings
 
-- **State:** immutable Python `tuple`, length n², tile `0` = blank, goal = `(1..n²-1, 0)`
-- **Instance generation:** random moves from goal (never back to parent) — guarantees solvability by construction
-- **BFS:** FIFO deque + visited dict — only run on 3×3
-- **A\*:** lazy-deletion heap, g-cost hash map, parent dict for depth reconstruction
-- **IDA\*:** DFS with iterative f-bound, parent pruning to avoid back-tracking, node counter for limit
-- **4×4 IDA\* limits:** 500K (scramble-10/20), 1M (scramble-30/50) — instances exceeding limit logged as DNF
-
----
-
-## Results Summary
-
-### Phase 2 (100 instances, seed=42)
-| Size | Algorithm | Nodes (mean) | Depth (mean) | Time (mean ms) |
-|------|-----------|-------------|--------------|----------------|
-| 3×3  | BFS       | 73,865      | 21.7         | 140.91         |
-| 3×3  | A\*        | 1,564       | 21.7         | 8.57           |
-| 3×3  | IDA\*      | 2,062       | —            | 8.75           |
-| 4×4  | A\*        | 212         | 18.7         | 1.79           |
-| 4×4  | IDA\*      | 177         | —            | 1.28           |
-
-### 4×4 Depth Scaling (50 instances, seed=77)
-| Scramble | Sol. Depth | A\* Nodes | IDA\* Nodes | Crossover |
-|----------|-----------|----------|------------|----------|
-| 10       | 10.0      | 15       | 13         | IDA\* wins |
-| 20       | 17.7      | 170      | 153        | IDA\* wins |
-| 30       | 25.2      | 3,430    | 4,122      | A\* wins |
-| 50       | 34.2      | 214,485  | 122,102*   | A\* wins |
-| 75       | —         | —        | —          | IDA\* intractable |
-
-\* 43/50 IDA\* instances solved (others DNF — node limit exceeded)
+- **A* vs BFS (3×3):** A* expands 47× fewer nodes on average; 16× faster
+- **Depth saturation (3×3):** Solution depth plateaus at ~21 moves past scramble-30; heuristic efficiency gain stabilizes at 54–56×
+- **4×4 crossover:** IDA* outperforms A* at shallow depths (≤~22 moves); A* dominates at depth 25+
+- **4×4 saturation:** No saturation observed through scramble-50 (solution depths still growing at 34 moves)
+- **IDA* tractability:** Intractable on 4×4 at scramble-75 with Manhattan-distance heuristic alone
