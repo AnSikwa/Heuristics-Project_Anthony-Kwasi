@@ -10,12 +10,6 @@ import urllib.request
 from pathlib import Path
 from io import BytesIO
 
-ROOT        = Path(__file__).parent
-DATA_DIR    = ROOT / "data"
-CHARTS_DIR  = ROOT / "charts"
-REPORTS_DIR = ROOT / "reports"
-REPORTS_DIR.mkdir(exist_ok=True)
-
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
@@ -139,7 +133,7 @@ def header_footer(canvas_obj, doc):
     canvas_obj.restoreState()
 
 # ─── Load data ───────────────────────────────────────────
-with open(DATA_DIR / "raw_results.json") as f:
+with open("/home/user/workspace/cs57200/raw_results.json") as f:
     raw = json.load(f)
 
 def sv(lst): return [v for v in lst if v is not None and (isinstance(v, (int,float)) and v >= 0)]
@@ -478,7 +472,7 @@ story += [
 # ══════════════════════════════
 # 7. CHARTS
 # ══════════════════════════════
-CHART_DIR = str(CHARTS_DIR) + "/"
+CHART_DIR = "/home/user/workspace/cs57200/charts/"
 story += [
     Paragraph("7. Visualizations", H1),
     HRFlowable(width="100%", thickness=0.6, color=BORDER, spaceAfter=6),
@@ -677,7 +671,7 @@ story += [
 ]
 
 # ─── Build PDF ───────────────────────────────────────────
-OUT = str(REPORTS_DIR / "CS57200_Phase2_Report.pdf")
+OUT = "/home/user/workspace/cs57200/CS57200_Phase2_Report.pdf"
 doc = SimpleDocTemplate(
     OUT,
     pagesize=letter,
