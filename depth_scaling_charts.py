@@ -130,9 +130,9 @@ plt.close(); print("Chart B saved.")
 # ─────────────────────────────────────────────────────────
 fig, ax = plt.subplots(figsize=(FW, FH))
 
-ratios_ba  = [mean_nodes(str(d), "bfs") / mean_nodes(str(d), "astar")   for d in DEPTHS]
-ratios_bi  = [mean_nodes(str(d), "bfs") / mean_nodes(str(d), "idastar") for d in DEPTHS]
-ratios_ai  = [mean_nodes(str(d), "astar") / mean_nodes(str(d), "idastar") for d in DEPTHS]
+ratios_ba  = [mean_nodes(str(d), "bfs") / mean_nodes(str(d), "astar")    if mean_nodes(str(d), "astar")    else 0 for d in DEPTHS]
+ratios_bi  = [mean_nodes(str(d), "bfs") / mean_nodes(str(d), "idastar")  if mean_nodes(str(d), "idastar")  else 0 for d in DEPTHS]
+ratios_ai  = [mean_nodes(str(d), "astar") / mean_nodes(str(d), "idastar") if mean_nodes(str(d), "idastar") else 0 for d in DEPTHS]
 
 ax.plot(DEPTHS, ratios_ba, "o-", color=RUST, linewidth=2.2, markersize=7, label="BFS / A*  (heuristic gain)")
 ax.plot(DEPTHS, ratios_bi, "s-", color=DARK, linewidth=2.2, markersize=7, label="BFS / IDA*")

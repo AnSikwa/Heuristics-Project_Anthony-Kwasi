@@ -4,11 +4,8 @@ Produces a formatted PDF report with code, tables, charts, and analysis.
 """
 
 import json
-import math
-import numpy as np
 import urllib.request
 from pathlib import Path
-from io import BytesIO
 
 ROOT        = Path(__file__).parent
 DATA_DIR    = ROOT / "data"
@@ -19,8 +16,7 @@ REPORTS_DIR.mkdir(exist_ok=True)
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.lib.colors import HexColor, white, black
-from reportlab.lib import colors
+from reportlab.lib.colors import HexColor, white
 from reportlab.platypus import (
     SimpleDocTemplate, Paragraph, Spacer, PageBreak,
     Table, TableStyle, Image, HRFlowable, KeepTogether
@@ -171,8 +167,6 @@ def results_table(size_key: str, show_bfs=True) -> Table:
 
     for label, key in configs:
         d = raw[size_key]
-        solved = raw[size_key][key]["solved"] if "solved" in raw[size_key][key] else "—"
-        # recompute solved
         n_solved = len([v for v in d[key]["depth"] if v is not None and v >= 0])
         rows.append([
             Paragraph(label, TblCellL),

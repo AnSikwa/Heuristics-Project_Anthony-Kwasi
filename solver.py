@@ -10,7 +10,7 @@ import time
 import random
 import math
 from collections import deque
-from typing import Optional, List, Dict
+from typing import List, Dict
 
 # ─────────────────────────────────────────────
 # State representation & helpers

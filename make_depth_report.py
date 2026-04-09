@@ -1,12 +1,11 @@
 """PDF report for the depth-scaling extension experiment."""
 
-import json, urllib.request, numpy as np
+import json, urllib.request
 from pathlib import Path
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.colors import HexColor, white
-from reportlab.lib import colors
 from reportlab.platypus import (
     SimpleDocTemplate, Paragraph, Spacer, HRFlowable,
     Table, TableStyle, Image, KeepTogether, PageBreak
@@ -97,7 +96,6 @@ def solved(sd, algo):
 
 # ── Results table ─────────────────────────────────────────
 def results_table():
-    hdr = [TH, TH, TH, TH, TH, TH, TH, TH]
     header_row = [Paragraph(h, TH) for h in [
         "Scramble\nDepth", "Sol.Depth\n(mean)", "BFS Nodes\n(mean)",
         "A* Nodes\n(mean)", "IDA* Nodes\n(mean)",

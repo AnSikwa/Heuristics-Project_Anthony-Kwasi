@@ -1,6 +1,6 @@
 """PDF report for the 4x4 depth-scaling extension."""
 
-import json, urllib.request, numpy as np
+import json, urllib.request
 from pathlib import Path
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch

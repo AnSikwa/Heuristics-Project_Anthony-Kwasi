@@ -1,6 +1,6 @@
 """Charts for the 4x4 depth-scaling experiment."""
 
-import json, numpy as np, math
+import json, numpy as np
 from pathlib import Path
 import matplotlib
 matplotlib.use("Agg")
