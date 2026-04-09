@@ -13,6 +13,12 @@ from reportlab.platypus import (
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 
+ROOT         = Path(__file__).parent
+DATA_DIR     = ROOT / "data"
+CHARTS4_DIR  = ROOT / "charts4x4"
+REPORTS_DIR  = ROOT / "reports"
+REPORTS_DIR.mkdir(exist_ok=True)
+
 FONT_DIR = Path("/tmp/fonts"); FONT_DIR.mkdir(exist_ok=True)
 def dl(url, name):
     p = FONT_DIR/name
@@ -67,9 +73,9 @@ def header_footer(cv, doc):
     cv.restoreState()
 
 # ── Data ─────────────────────────────────────────────────
-with open("/home/user/workspace/cs57200/depth_scaling_4x4_results.json") as f:
+with open(DATA_DIR / "depth_scaling_4x4_results.json") as f:
     raw = json.load(f)
-with open("/home/user/workspace/cs57200/depth_scaling_results.json") as f:
+with open(DATA_DIR / "depth_scaling_results.json") as f:
     raw3 = json.load(f)
 
 DEPTHS = sorted(raw.keys(), key=int)
@@ -109,7 +115,7 @@ def results_table():
     ]))
     return t
 
-C = "/home/user/workspace/cs57200/charts4x4/"
+C = str(CHARTS4_DIR) + "/"
 story = []
 
 # ── Cover ────────────────────────────────────────────────
@@ -335,7 +341,7 @@ story += [
 ]
 
 # ── Build ─────────────────────────────────────────────────
-OUT = "/home/user/workspace/cs57200/CS57200_4x4_DepthScaling.pdf"
+OUT = str(REPORTS_DIR / "CS57200_4x4_DepthScaling.pdf")
 doc = SimpleDocTemplate(OUT, pagesize=letter,
     title="CS 57200 – 4×4 Depth-Scaling: A* vs IDA* Crossover",
     author="Perplexity Computer",

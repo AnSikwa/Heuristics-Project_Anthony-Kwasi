@@ -2,14 +2,17 @@
 
 import json
 import math
+from pathlib import Path
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import numpy as np
-import os
 
-os.makedirs("/home/user/workspace/cs57200/charts", exist_ok=True)
+ROOT       = Path(__file__).parent
+DATA_DIR   = ROOT / "data"
+CHARTS_DIR = ROOT / "charts"
+CHARTS_DIR.mkdir(exist_ok=True)
 
 # ─── palette (design-foundations Nexus) ───
 TEAL  = "#20808D"
@@ -45,7 +48,7 @@ plt.rcParams.update({
 def safe_vals(lst):
     return [v for v in lst if v is not None and v >= 0]
 
-with open("/home/user/workspace/cs57200/raw_results.json") as f:
+with open(DATA_DIR / "raw_results.json") as f:
     raw = json.load(f)
 
 # ═══════════════════════════════════════════════════════
@@ -90,7 +93,7 @@ ax.annotate(f"A* median: {int(np.median(ast_nodes)):,}",
             arrowprops=dict(arrowstyle="->", color=TEAL, lw=0.8))
 
 plt.tight_layout()
-plt.savefig("/home/user/workspace/cs57200/charts/chart1_nodes_boxplot_3x3.png", bbox_inches="tight")
+plt.savefig(CHARTS_DIR / "chart1_nodes_boxplot_3x3.png", bbox_inches="tight")
 plt.close()
 print("Chart 1 saved.")
 
@@ -124,7 +127,7 @@ ax.yaxis.grid(True)
 ax.set_axisbelow(True)
 
 plt.tight_layout()
-plt.savefig("/home/user/workspace/cs57200/charts/chart2_nodes_grouped_bar.png", bbox_inches="tight")
+plt.savefig(CHARTS_DIR / "chart2_nodes_grouped_bar.png", bbox_inches="tight")
 plt.close()
 print("Chart 2 saved.")
 
@@ -169,7 +172,7 @@ legend_handles = [
 ax.legend(handles=legend_handles, fontsize=8)
 
 plt.tight_layout()
-plt.savefig("/home/user/workspace/cs57200/charts/chart3_runtime_violin_3x3.png", bbox_inches="tight")
+plt.savefig(CHARTS_DIR / "chart3_runtime_violin_3x3.png", bbox_inches="tight")
 plt.close()
 print("Chart 3 saved.")
 
@@ -212,7 +215,7 @@ ax.xaxis.grid(True)
 ax.set_axisbelow(True)
 
 plt.tight_layout()
-plt.savefig("/home/user/workspace/cs57200/charts/chart4_depth_vs_nodes_scatter.png", bbox_inches="tight")
+plt.savefig(CHARTS_DIR / "chart4_depth_vs_nodes_scatter.png", bbox_inches="tight")
 plt.close()
 print("Chart 4 saved.")
 
@@ -245,8 +248,8 @@ ax.yaxis.grid(True)
 ax.set_axisbelow(True)
 
 plt.tight_layout()
-plt.savefig("/home/user/workspace/cs57200/charts/chart5_runtime_bar_by_size.png", bbox_inches="tight")
+plt.savefig(CHARTS_DIR / "chart5_runtime_bar_by_size.png", bbox_inches="tight")
 plt.close()
 print("Chart 5 saved.")
 
-print("\nAll charts generated in /home/user/workspace/cs57200/charts/")
+print(f"\nAll charts generated in {CHARTS_DIR}")

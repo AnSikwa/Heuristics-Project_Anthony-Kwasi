@@ -7,6 +7,11 @@ Unsolved instances are logged as failed (node limit exceeded).
 """
 
 import json, math, time, random, heapq, sys
+from pathlib import Path
+
+ROOT     = Path(__file__).parent
+DATA_DIR = ROOT / "data"
+DATA_DIR.mkdir(exist_ok=True)
 
 def goal_state(n): return tuple(range(1, n*n)) + (0,)
 
@@ -116,7 +121,7 @@ for sd in SCRAMBLE_DEPTHS:
     results[str(sd)] = bucket
 
     # Save incrementally after every tier so a timeout doesn't lose data
-    with open("/home/user/workspace/cs57200/depth_scaling_4x4_results.json","w") as f:
+    with open(DATA_DIR / "depth_scaling_4x4_results.json","w") as f:
         json.dump(results, f, indent=2)
 
     for algo in ["astar","idastar"]:
@@ -129,6 +134,6 @@ for sd in SCRAMBLE_DEPTHS:
               f"depth_mean={sum(ds)/len(ds) if ds else 0:.1f}  "
               f"time_mean={sum(ts)/len(ts) if ts else 0:.2f} ms")
 
-with open("/home/user/workspace/cs57200/depth_scaling_4x4_results.json","w") as f:
+with open(DATA_DIR / "depth_scaling_4x4_results.json","w") as f:
     json.dump(results, f, indent=2)
 print("\nSaved to depth_scaling_4x4_results.json")

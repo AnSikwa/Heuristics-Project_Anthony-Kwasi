@@ -3,13 +3,17 @@ Depth-scaling charts for CS 57200.
 Shows how A*/IDA*/BFS node expansions scale with scramble depth and actual solution depth.
 """
 
-import json, numpy as np, os
+import json, numpy as np
+from pathlib import Path
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 
-os.makedirs("/home/user/workspace/cs57200/charts", exist_ok=True)
+ROOT       = Path(__file__).parent
+DATA_DIR   = ROOT / "data"
+CHARTS_DIR = ROOT / "charts"
+CHARTS_DIR.mkdir(exist_ok=True)
 
 # ── Palette ──────────────────────────────────────────────
 TEAL  = "#20808D"; RUST  = "#A84B2F"; DARK  = "#1B474D"
@@ -27,7 +31,7 @@ plt.rcParams.update({
 
 FW, FH = 6.857, 4.0   # ratio matches 6:3.5 PDF embed
 
-with open("/home/user/workspace/cs57200/depth_scaling_results.json") as f:
+with open(DATA_DIR / "depth_scaling_results.json") as f:
     raw = json.load(f)
 
 DEPTHS = [10, 20, 30, 50, 75]
@@ -77,7 +81,7 @@ ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"{x:,.0f}"))
 ax.legend(loc="upper left"); ax.grid(True, which="both"); ax.set_axisbelow(True)
 
 plt.tight_layout()
-plt.savefig("/home/user/workspace/cs57200/charts/chartA_nodes_vs_scramble_log.png",
+plt.savefig(CHARTS_DIR / "chartA_nodes_vs_scramble_log.png",
             bbox_inches="tight", pad_inches=0.05)
 plt.close(); print("Chart A saved.")
 
@@ -117,7 +121,7 @@ ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"{x:,.0f}"))
 ax.legend(fontsize=8, loc="upper left"); ax.grid(True, which="both"); ax.set_axisbelow(True)
 
 plt.tight_layout()
-plt.savefig("/home/user/workspace/cs57200/charts/chartB_nodes_vs_actual_depth.png",
+plt.savefig(CHARTS_DIR / "chartB_nodes_vs_actual_depth.png",
             bbox_inches="tight", pad_inches=0.05)
 plt.close(); print("Chart B saved.")
 
@@ -146,7 +150,7 @@ ax.set_xticks(DEPTHS)
 ax.legend(fontsize=9); ax.yaxis.grid(True); ax.set_axisbelow(True)
 
 plt.tight_layout()
-plt.savefig("/home/user/workspace/cs57200/charts/chartC_ratio_vs_scramble.png",
+plt.savefig(CHARTS_DIR / "chartC_ratio_vs_scramble.png",
             bbox_inches="tight", pad_inches=0.05)
 plt.close(); print("Chart C saved.")
 
@@ -176,7 +180,7 @@ ax.set_xticks(DEPTHS)
 ax.legend(); ax.yaxis.grid(True); ax.set_axisbelow(True)
 
 plt.tight_layout()
-plt.savefig("/home/user/workspace/cs57200/charts/chartD_runtime_vs_scramble.png",
+plt.savefig(CHARTS_DIR / "chartD_runtime_vs_scramble.png",
             bbox_inches="tight", pad_inches=0.05)
 plt.close(); print("Chart D saved.")
 
@@ -215,7 +219,7 @@ for pos, dd in zip(positions, depth_data):
             color=TEXT, weight="bold")
 
 plt.tight_layout()
-plt.savefig("/home/user/workspace/cs57200/charts/chartE_depth_distribution.png",
+plt.savefig(CHARTS_DIR / "chartE_depth_distribution.png",
             bbox_inches="tight", pad_inches=0.05)
 plt.close(); print("Chart E saved.")
 

@@ -263,6 +263,11 @@ def safe_stats(lst):
 
 if __name__ == "__main__":
     import json
+    from pathlib import Path
+
+    ROOT = Path(__file__).parent
+    DATA_DIR = ROOT / "data"
+    DATA_DIR.mkdir(exist_ok=True)
 
     NUM = 100
     SEED = 42
@@ -292,10 +297,10 @@ if __name__ == "__main__":
                 "solved":  res[algo]["solved"],
             }
 
-    with open("/home/user/workspace/cs57200/raw_results.json", "w") as f:
+    with open(DATA_DIR / "raw_results.json", "w") as f:
         json.dump({"3x3": res3, "4x4": res4}, f, indent=2)
 
-    with open("/home/user/workspace/cs57200/summary.json", "w") as f:
+    with open(DATA_DIR / "summary.json", "w") as f:
         # Remove 'values' list for summary file
         import copy
         s2 = copy.deepcopy(summary)

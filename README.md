@@ -5,6 +5,26 @@
 
 ---
 
+## Quick Start
+
+### Prerequisites
+- Python 3.10 or higher
+
+### Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+> **Tip:** Use a virtual environment to keep dependencies isolated:
+> ```bash
+> python -m venv .venv
+> source .venv/bin/activate   # Windows: .venv\Scripts\activate
+> pip install -r requirements.txt
+> ```
+
+---
+
 ## Files
 
 | File | Purpose |
@@ -19,49 +39,54 @@
 | `depth_scaling_4x4_charts.py` | 4×4 depth-scaling charts (6 charts → `charts4x4/`) |
 | `make_4x4_depth_report.py` | 4×4 depth-scaling PDF report generator |
 
+Output directories are created automatically when each script runs:
+
+| Directory | Contents |
+|-----------|----------|
+| `data/` | JSON result files (`raw_results.json`, `summary.json`, etc.) |
+| `charts/` | Phase 2 and 3×3 depth-scaling PNG charts |
+| `charts4x4/` | 4×4 depth-scaling PNG charts |
+| `reports/` | Generated PDF reports |
+
 ---
 
 ## Reproduction
 
-### Requirements
-```
-pip install reportlab matplotlib numpy
-```
-
-### Step 1 – Run Phase 2 main experiment (generates raw_results.json + summary.json)
-```
+### Step 1 – Run Phase 2 main experiment
+Generates `data/raw_results.json` and `data/summary.json`.
+```bash
 python solver.py
 ```
 
 ### Step 2 – Generate Phase 2 charts
-```
+```bash
 python make_charts.py
 ```
 
 ### Step 3 – Generate Phase 2 PDF report
-```
+```bash
 python make_report.py
 ```
 
 ### Step 4 – Run 3×3 depth-scaling experiment
-```
+```bash
 python depth_scaling.py
 ```
 
 ### Step 5 – Generate 3×3 depth-scaling charts and report
-```
+```bash
 python depth_scaling_charts.py
 python make_depth_report.py
 ```
 
 ### Step 6 – Run 4×4 depth-scaling experiment
-```
+```bash
 python depth_scaling_4x4.py
 ```
 > Note: scramble depth 75 will time out (expected — IDA* intractable at that depth with Manhattan-only heuristic). Results for depths 10/20/30/50 are saved incrementally.
 
 ### Step 7 – Generate 4×4 charts and report
-```
+```bash
 python depth_scaling_4x4_charts.py
 python make_4x4_depth_report.py
 ```
