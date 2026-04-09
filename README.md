@@ -1,7 +1,7 @@
 # CS 57200 – Phase 2: Sliding Tile Puzzle Solver
 **Purdue University · Track B: Search & Optimization**  
 **Project:** Heuristic A\* Search for Large Sliding Puzzles Using Advanced Heuristics  
-**Due:** April 9, 2026 via Brightspace
+
 
 ---
 
