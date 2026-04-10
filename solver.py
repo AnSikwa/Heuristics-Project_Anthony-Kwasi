@@ -165,9 +165,9 @@ def idastar(start: tuple, n: int, max_nodes: int = 500_000) -> Dict:
                 continue
             path.append(nb)
             t = search(path, g + 1, bound)
-            path.pop()
             if t == -1:
                 return -1
+            path.pop()
             if t == -2:
                 return -2
             if t < minimum:
