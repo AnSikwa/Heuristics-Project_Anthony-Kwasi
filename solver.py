@@ -1,72 +1,122 @@
 """
-CS 57200 – Heuristic Problem Solving
-Phase 2: Sliding Tile Puzzle Solver
-Algorithms: BFS, A* (Manhattan distance), IDA* (Manhattan distance)
-Puzzle sizes: 3x3 (8-puzzle), 4x4 (15-puzzle)
+CS 57200 - Heuristic Problem Solving
+Sliding Tile Puzzle Solver: BFS, A*, IDA*
+
+This module exposes the core search algorithms used in the Phase 2 and
+Phase 3 experiments. Each search returns a uniform result dict with
+keys ``nodes_expanded``, ``depth``, and ``found``.
+
+Heuristics live in ``heuristics.py`` (Manhattan, Linear Conflict,
+Disjoint PDB). Algorithms accept a heuristic callable so the same
+search code is reused across all enhancements.
+
+Algorithms:
+    - BFS (uninformed baseline; uses no heuristic)
+    - A* with a pluggable heuristic
+    - IDA* with a pluggable heuristic
+
+Puzzle sizes: 3x3 (8-puzzle) and 4x4 (15-puzzle).
 """
 
 import heapq
-import time
-import random
 import math
+import random
+import time
 from collections import deque
-from typing import Optional, List, Dict
+from typing import Callable, Dict, List, Optional, Tuple
 
-# ─────────────────────────────────────────────
+from heuristics import manhattan_distance
+
+
+# ─────────────────────────────────────────────────────────────
 # State representation & helpers
-# ─────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────
 
 def goal_state(n: int) -> tuple:
+    """Canonical goal state: (1, 2, ..., n*n - 1, 0)."""
     return tuple(range(1, n * n)) + (0,)
 
 
 def blank_index(state: tuple) -> int:
+    """Return the index of the blank (0) in the flat state tuple."""
     return state.index(0)
 
 
 def neighbors(state: tuple, n: int) -> List[tuple]:
+    """
+    Generate all states reachable by sliding the blank one cell.
+
+    Args:
+        state: current flat state tuple of length n*n.
+        n: board side length.
+
+    Returns:
+        List of successor state tuples (up to 4).
+    """
     bi = blank_index(state)
     row, col = divmod(bi, n)
-    moves = []
-    for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+    out = []
+    for dr, dc in ((-1, 0), (1, 0), (0, -1), (0, 1)):
         nr, nc = row + dr, col + dc
         if 0 <= nr < n and 0 <= nc < n:
             ni = nr * n + nc
             lst = list(state)
             lst[bi], lst[ni] = lst[ni], lst[bi]
-            moves.append(tuple(lst))
-    return moves
+            out.append(tuple(lst))
+    return out
 
 
-def manhattan_distance(state: tuple, n: int) -> int:
-    dist = 0
-    for idx, tile in enumerate(state):
-        if tile == 0:
-            continue
-        goal_idx = tile - 1
-        goal_row, goal_col = divmod(goal_idx, n)
-        cur_row, cur_col = divmod(idx, n)
-        dist += abs(cur_row - goal_row) + abs(cur_col - goal_col)
-    return dist
+def generate_solvable_instance(n: int, rng: random.Random,
+                               num_moves: int) -> tuple:
+    """
+    Generate a solvable puzzle instance via random walk from the goal.
 
+    Each move is chosen uniformly at random from legal blank moves,
+    excluding the immediate predecessor to avoid trivial back-tracking.
+    Any state reachable from the goal by legal moves is solvable, so
+    no parity check is required.
 
-def generate_solvable_instance(n: int, rng: random.Random, num_moves: int) -> tuple:
-    """Generate instance by making num_moves random moves from goal (always solvable)."""
+    Args:
+        n: board side length.
+        rng: seeded ``random.Random`` for reproducibility.
+        num_moves: scramble depth (number of random moves from goal).
+
+    Returns:
+        Solvable state tuple.
+    """
     state = list(goal_state(n))
-    prev = None
+    prev: Optional[tuple] = None
     for _ in range(num_moves):
-        nbs = [nb for nb in neighbors(tuple(state), n) if tuple(nb) != prev]
-        choice = rng.choice(nbs)
+        candidates = [nb for nb in neighbors(tuple(state), n)
+                      if tuple(nb) != prev]
+        choice = rng.choice(candidates)
         prev = tuple(state)
         state = list(choice)
     return tuple(state)
 
 
-# ─────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────
 # BFS
-# ─────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────
 
 def bfs(start: tuple, n: int, max_nodes: int = 500_000) -> Dict:
+    """
+    Breadth-first search from ``start`` to the goal state.
+
+    BFS is used as the uninformed baseline. Because edge costs are
+    uniform, BFS returns an optimal-length path. It is impractical on
+    the 4x4 puzzle for non-trivial scrambles.
+
+    Args:
+        start: start state tuple.
+        n: board side length.
+        max_nodes: hard cap on nodes expanded; if exceeded the search
+            returns ``found=False``.
+
+    Returns:
+        Dict with keys ``nodes_expanded``, ``depth`` (or -1 if unsolved)
+        and ``found``.
+    """
     goal = goal_state(n)
     if start == goal:
         return {"nodes_expanded": 0, "depth": 0, "found": True}
@@ -79,7 +129,8 @@ def bfs(start: tuple, n: int, max_nodes: int = 500_000) -> Dict:
         state = frontier.popleft()
         nodes_expanded += 1
         if nodes_expanded > max_nodes:
-            return {"nodes_expanded": nodes_expanded, "depth": -1, "found": False}
+            return {"nodes_expanded": nodes_expanded, "depth": -1,
+                    "found": False}
 
         for nb in neighbors(state, n):
             if nb not in visited:
@@ -97,20 +148,43 @@ def bfs(start: tuple, n: int, max_nodes: int = 500_000) -> Dict:
     return {"nodes_expanded": nodes_expanded, "depth": -1, "found": False}
 
 
-# ─────────────────────────────────────────────
-# A* with Manhattan distance
-# ─────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────
+# A* with pluggable heuristic
+# ─────────────────────────────────────────────────────────────
 
-def astar(start: tuple, n: int, max_nodes: int = 1_000_000) -> Dict:
+def astar(start: tuple, n: int,
+          heuristic: Optional[Callable[[tuple, int], int]] = None,
+          max_nodes: int = 1_000_000) -> Dict:
+    """
+    A* search with a pluggable admissible heuristic.
+
+    Implementation notes:
+        - Uses a binary heap ordered by (f, g, state) where f = g + h.
+        - Lazy deletion: outdated heap entries are skipped when popped.
+        - Tie-breaking: heap order breaks ties by lower g first because
+          tuples compare lexicographically; this preserves admissibility.
+
+    Args:
+        start: start state tuple.
+        n: board side length.
+        heuristic: callable ``h(state, n) -> int``. Defaults to Manhattan
+            distance if None.
+        max_nodes: hard cap on nodes expanded.
+
+    Returns:
+        Result dict (see ``bfs`` docstring).
+    """
+    if heuristic is None:
+        heuristic = manhattan_distance
     goal = goal_state(n)
     if start == goal:
         return {"nodes_expanded": 0, "depth": 0, "found": True}
 
-    h_start = manhattan_distance(start, n)
+    h_start = heuristic(start, n)
     heap = [(h_start, 0, start)]
     g_best = {start: 0}
-    nodes_expanded = 0
     parent = {start: None}
+    nodes_expanded = 0
 
     while heap:
         f, g, state = heapq.heappop(heap)
@@ -118,7 +192,8 @@ def astar(start: tuple, n: int, max_nodes: int = 1_000_000) -> Dict:
             continue
         nodes_expanded += 1
         if nodes_expanded > max_nodes:
-            return {"nodes_expanded": nodes_expanded, "depth": -1, "found": False}
+            return {"nodes_expanded": nodes_expanded, "depth": -1,
+                    "found": False}
 
         if state == goal:
             depth = 0
@@ -126,30 +201,58 @@ def astar(start: tuple, n: int, max_nodes: int = 1_000_000) -> Dict:
             while parent[cur] is not None:
                 cur = parent[cur]
                 depth += 1
-            return {"nodes_expanded": nodes_expanded, "depth": depth, "found": True}
+            return {"nodes_expanded": nodes_expanded, "depth": depth,
+                    "found": True}
 
         for nb in neighbors(state, n):
             new_g = g + 1
             if new_g < g_best.get(nb, math.inf):
                 g_best[nb] = new_g
                 parent[nb] = state
-                h = manhattan_distance(nb, n)
+                h = heuristic(nb, n)
                 heapq.heappush(heap, (new_g + h, new_g, nb))
 
     return {"nodes_expanded": nodes_expanded, "depth": -1, "found": False}
 
 
-# ─────────────────────────────────────────────
-# IDA* with Manhattan distance
-# ─────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────
+# IDA* with pluggable heuristic
+# ─────────────────────────────────────────────────────────────
 
-def idastar(start: tuple, n: int, max_nodes: int = 500_000) -> Dict:
+def idastar(start: tuple, n: int,
+            heuristic: Optional[Callable[[tuple, int], int]] = None,
+            max_nodes: int = 500_000) -> Dict:
+    """
+    Iterative-Deepening A* with a pluggable admissible heuristic.
+
+    IDA* runs a sequence of depth-first searches bounded by an
+    f-threshold that increases to the next-smallest f-value after each
+    failed iteration. Memory use is O(d) which makes IDA* applicable
+    to the 4x4 puzzle where A* exhausts memory.
+
+    Implementation notes:
+        - ``parent pruning``: we skip the immediate predecessor so the
+          search does not oscillate.
+        - The recursion uses a Python list as a stack for the path; for
+          deep 4x4 instances we set ``sys.setrecursionlimit`` upstream.
+
+    Args:
+        start: start state tuple.
+        n: board side length.
+        heuristic: callable ``h(state, n) -> int``. Defaults to Manhattan.
+        max_nodes: cap on total node expansions across all iterations.
+
+    Returns:
+        Result dict (see ``bfs`` docstring).
+    """
+    if heuristic is None:
+        heuristic = manhattan_distance
     goal = goal_state(n)
     counter = [0]
 
     def search(path: list, g: int, bound: int) -> int:
         state = path[-1]
-        h = manhattan_distance(state, n)
+        h = heuristic(state, n)
         f = g + h
         if f > bound:
             return f
@@ -174,25 +277,44 @@ def idastar(start: tuple, n: int, max_nodes: int = 500_000) -> Dict:
                 minimum = t
         return minimum
 
-    bound = manhattan_distance(start, n)
+    bound = heuristic(start, n)
     path = [start]
     while True:
         t = search(path, 0, bound)
         if t == -1:
-            return {"nodes_expanded": counter[0], "depth": len(path) - 1, "found": True}
+            return {"nodes_expanded": counter[0],
+                    "depth": len(path) - 1, "found": True}
         if t == -2 or t == math.inf:
-            return {"nodes_expanded": counter[0], "depth": -1, "found": False}
+            return {"nodes_expanded": counter[0], "depth": -1,
+                    "found": False}
         bound = t
 
 
-# ─────────────────────────────────────────────
-# Experiment runner
-# ─────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────
+# Phase 2 experiment runner (kept for backward compatibility)
+# ─────────────────────────────────────────────────────────────
 
 def run_experiment(n: int, instances: list,
                    bfs_limit: int = 500_000,
                    astar_limit: int = 1_000_000,
                    idastar_limit: int = 500_000) -> Dict:
+    """
+    Run BFS, A*, and IDA* (all with Manhattan distance) on each instance.
+
+    Used by the original Phase 2 experiment; Phase 3 ablations live in
+    ``ablation.py``.
+
+    Args:
+        n: board side length.
+        instances: list of state tuples.
+        bfs_limit: BFS node cap.
+        astar_limit: A* node cap.
+        idastar_limit: IDA* node cap.
+
+    Returns:
+        Dict with per-algorithm aggregated lists of ``nodes``, ``depth``,
+        ``time_ms`` and a ``solved`` count.
+    """
     results = {
         "bfs":     {"nodes": [], "depth": [], "time_ms": [], "solved": 0},
         "astar":   {"nodes": [], "depth": [], "time_ms": [], "solved": 0},
@@ -200,13 +322,14 @@ def run_experiment(n: int, instances: list,
     }
 
     for i, state in enumerate(instances):
-        print(f"  [{n}x{n}] Instance {i+1}/{len(instances)} ...", end="\r", flush=True)
+        print(f"  [{n}x{n}] Instance {i+1}/{len(instances)} ...",
+              end="\r", flush=True)
 
-        # ── BFS ──
         if n == 3:
             t0 = time.perf_counter()
             r = bfs(state, n, max_nodes=bfs_limit)
-            results["bfs"]["time_ms"].append((time.perf_counter() - t0) * 1000)
+            results["bfs"]["time_ms"].append(
+                (time.perf_counter() - t0) * 1000)
             results["bfs"]["nodes"].append(r["nodes_expanded"])
             if r["found"]:
                 results["bfs"]["depth"].append(r["depth"])
@@ -218,10 +341,10 @@ def run_experiment(n: int, instances: list,
             results["bfs"]["depth"].append(None)
             results["bfs"]["time_ms"].append(None)
 
-        # ── A* ──
         t0 = time.perf_counter()
         r = astar(state, n, max_nodes=astar_limit)
-        results["astar"]["time_ms"].append((time.perf_counter() - t0) * 1000)
+        results["astar"]["time_ms"].append(
+            (time.perf_counter() - t0) * 1000)
         results["astar"]["nodes"].append(r["nodes_expanded"])
         if r["found"]:
             results["astar"]["depth"].append(r["depth"])
@@ -229,10 +352,10 @@ def run_experiment(n: int, instances: list,
         else:
             results["astar"]["depth"].append(None)
 
-        # ── IDA* ──
         t0 = time.perf_counter()
         r = idastar(state, n, max_nodes=idastar_limit)
-        results["idastar"]["time_ms"].append((time.perf_counter() - t0) * 1000)
+        results["idastar"]["time_ms"].append(
+            (time.perf_counter() - t0) * 1000)
         results["idastar"]["nodes"].append(r["nodes_expanded"])
         if r["found"]:
             results["idastar"]["depth"].append(r["depth"])
@@ -240,83 +363,69 @@ def run_experiment(n: int, instances: list,
         else:
             results["idastar"]["depth"].append(None)
 
-    print(f"\n  [{n}x{n}] Done. A* solved {results['astar']['solved']}, IDA* solved {results['idastar']['solved']}")
+    print(f"\n  [{n}x{n}] Done. A* solved {results['astar']['solved']}, "
+          f"IDA* solved {results['idastar']['solved']}")
     return results
 
 
 def safe_stats(lst):
+    """
+    Return summary stats for a list, ignoring None values.
+
+    Args:
+        lst: iterable of numeric values or None.
+
+    Returns:
+        Dict with ``mean``, ``median``, ``min``, ``max`` keys.
+    """
     vals = [v for v in lst if v is not None]
     if not vals:
         return {"mean": 0, "median": 0, "min": 0, "max": 0}
     vals_sorted = sorted(vals)
-    n = len(vals_sorted)
-    mid = n // 2
-    median = (vals_sorted[mid - 1] + vals_sorted[mid]) / 2.0 if n % 2 == 0 else float(vals_sorted[mid])
     return {
-        "mean":   round(sum(vals) / n, 3),
-        "median": round(median, 3),
-        "min":    round(min(vals), 3),
-        "max":    round(max(vals), 3),
-        "values": vals,
+        "mean": sum(vals) / len(vals),
+        "median": vals_sorted[len(vals) // 2],
+        "min": min(vals),
+        "max": max(vals),
     }
 
 
+# ─────────────────────────────────────────────────────────────
+# Main entry: replicates Phase 2 results.
+# ─────────────────────────────────────────────────────────────
+
 if __name__ == "__main__":
     import json
+    import os
 
-    NUM = 100
     SEED = 42
+    OUT = "raw_results.json"
     rng = random.Random(SEED)
 
-    # 3x3: scramble with 50 random moves (gives medium-hard instances)
-    instances_3x3 = [generate_solvable_instance(3, rng, 50) for _ in range(NUM)]
-    # 4x4: scramble with only 20 moves to keep them tractable for all three solvers
-    instances_4x4 = [generate_solvable_instance(4, rng, 20) for _ in range(NUM)]
+    print("Generating 100 3x3 instances (50-move scramble)...")
+    inst3 = [generate_solvable_instance(3, rng, 50) for _ in range(100)]
+    print("Generating 100 4x4 instances (20-move scramble)...")
+    inst4 = [generate_solvable_instance(4, rng, 20) for _ in range(100)]
 
-    print("=== 3x3 (8-puzzle) ===")
-    res3 = run_experiment(3, instances_3x3, bfs_limit=500_000,
-                          astar_limit=1_000_000, idastar_limit=500_000)
+    print("\nRunning 3x3 experiments...")
+    res3 = run_experiment(3, inst3)
+    print("Running 4x4 experiments...")
+    res4 = run_experiment(4, inst4, bfs_limit=0)
 
-    print("=== 4x4 (15-puzzle) ===")
-    res4 = run_experiment(4, instances_4x4, bfs_limit=0,
-                          astar_limit=2_000_000, idastar_limit=1_000_000)
-
-    summary = {}
-    for label, res, n in [("3x3", res3, 3), ("4x4", res4, 4)]:
-        summary[label] = {}
-        for algo in ["bfs", "astar", "idastar"]:
-            summary[label][algo] = {
-                "nodes":   safe_stats(res[algo]["nodes"]),
-                "depth":   safe_stats(res[algo]["depth"]),
-                "time_ms": safe_stats(res[algo]["time_ms"]),
-                "solved":  res[algo]["solved"],
-            }
-
-    with open("/home/user/workspace/cs57200/raw_results.json", "w") as f:
-        json.dump({"3x3": res3, "4x4": res4}, f, indent=2)
-
-    with open("/home/user/workspace/cs57200/summary.json", "w") as f:
-        # Remove 'values' list for summary file
-        import copy
-        s2 = copy.deepcopy(summary)
-        for sz in s2:
-            for algo in s2[sz]:
-                for metric in ["nodes", "depth", "time_ms"]:
-                    s2[sz][algo][metric].pop("values", None)
-        json.dump(s2, f, indent=2)
-
-    print("\n=== SUMMARY ===")
-    for sz in summary:
-        print(f"\n{sz} puzzle:")
-        for algo in ["bfs", "astar", "idastar"]:
-            d = summary[sz][algo]
-            name = algo.upper().replace("ASTAR", "A*").replace("IDASTAR", "IDA*")
-            if sz == "4x4" and algo == "bfs":
-                print(f"  {name:6s}: N/A (impractical for 4x4)")
-                continue
-            print(f"  {name:6s}: solved={d['solved']}/100  "
-                  f"nodes_mean={d['nodes']['mean']:.0f}  "
-                  f"depth_mean={d['depth']['mean']:.1f}  "
-                  f"time_mean={d['time_ms']['mean']:.2f}ms")
-
-    print("\nResults saved.")
+    summary = {
+        "seed": SEED,
+        "3x3": {alg: {"stats": safe_stats(d["nodes"]),
+                      "depth_stats": safe_stats(d["depth"]),
+                      "time_stats": safe_stats(d["time_ms"]),
+                      "solved": d["solved"]}
+                for alg, d in res3.items()},
+        "4x4": {alg: {"stats": safe_stats(d["nodes"]),
+                      "depth_stats": safe_stats(d["depth"]),
+                      "time_stats": safe_stats(d["time_ms"]),
+                      "solved": d["solved"]}
+                for alg, d in res4.items()},
+    }
+    with open(OUT, "w") as f:
+        json.dump({"raw3": res3, "raw4": res4, "summary": summary}, f,
+                  indent=2, default=str)
+    print(f"\nResults saved to {OUT}")
