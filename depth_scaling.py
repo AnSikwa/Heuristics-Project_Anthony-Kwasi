@@ -98,8 +98,9 @@ def idastar(start, n, max_nodes=500_000):
         prev = path[-2] if len(path) >= 2 else None
         for nb in neighbors(s, n):
             if nb == prev: continue
-            path.append(nb); t = search(path, g+1, bound); path.pop()
+            path.append(nb); t = search(path, g+1, bound)
             if t == -1: return -1
+            path.pop()
             if t == -2: return -2
             if t < minimum: minimum = t
         return minimum
