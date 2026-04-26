@@ -1,0 +1,1853 @@
+{
+  "seed": 1234,
+  "n": 4,
+  "scramble_depth": 30,
+  "n_instances": 50,
+  "max_nodes": 5000000,
+  "pdb_build_seconds": 3.280547857284546,
+  "pdb_partition": [
+    [
+      1,
+      2,
+      5,
+      6
+    ],
+    [
+      3,
+      4,
+      7,
+      8
+    ],
+    [
+      9,
+      10,
+      13,
+      14
+    ],
+    [
+      11,
+      12,
+      15
+    ]
+  ],
+  "heuristics": {
+    "manhattan": {
+      "astar": [
+        {
+          "nodes": 2186,
+          "depth": 22,
+          "time_ms": 20.47026700006427,
+          "solved": true
+        },
+        {
+          "nodes": 8621,
+          "depth": 26,
+          "time_ms": 82.78036999990945,
+          "solved": true
+        },
+        {
+          "nodes": 1678,
+          "depth": 30,
+          "time_ms": 15.105727999980445,
+          "solved": true
+        },
+        {
+          "nodes": 137,
+          "depth": 30,
+          "time_ms": 1.2868759999946633,
+          "solved": true
+        },
+        {
+          "nodes": 6074,
+          "depth": 28,
+          "time_ms": 56.57464900002651,
+          "solved": true
+        },
+        {
+          "nodes": 5397,
+          "depth": 28,
+          "time_ms": 51.717488000008416,
+          "solved": true
+        },
+        {
+          "nodes": 12073,
+          "depth": 28,
+          "time_ms": 121.05235599995012,
+          "solved": true
+        },
+        {
+          "nodes": 12318,
+          "depth": 28,
+          "time_ms": 121.25217100003738,
+          "solved": true
+        },
+        {
+          "nodes": 3116,
+          "depth": 30,
+          "time_ms": 29.888542999970014,
+          "solved": true
+        },
+        {
+          "nodes": 5136,
+          "depth": 30,
+          "time_ms": 50.57488900001772,
+          "solved": true
+        },
+        {
+          "nodes": 153,
+          "depth": 22,
+          "time_ms": 1.3823939999610957,
+          "solved": true
+        },
+        {
+          "nodes": 3794,
+          "depth": 26,
+          "time_ms": 35.54629100005968,
+          "solved": true
+        },
+        {
+          "nodes": 1803,
+          "depth": 24,
+          "time_ms": 25.12464899996303,
+          "solved": true
+        },
+        {
+          "nodes": 596,
+          "depth": 26,
+          "time_ms": 5.667261999974471,
+          "solved": true
+        },
+        {
+          "nodes": 3083,
+          "depth": 28,
+          "time_ms": 29.487032000020008,
+          "solved": true
+        },
+        {
+          "nodes": 21269,
+          "depth": 30,
+          "time_ms": 239.7823190000281,
+          "solved": true
+        },
+        {
+          "nodes": 4130,
+          "depth": 26,
+          "time_ms": 45.043559999953686,
+          "solved": true
+        },
+        {
+          "nodes": 288,
+          "depth": 24,
+          "time_ms": 4.102597999917634,
+          "solved": true
+        },
+        {
+          "nodes": 543,
+          "depth": 20,
+          "time_ms": 5.971068999997442,
+          "solved": true
+        },
+        {
+          "nodes": 30620,
+          "depth": 28,
+          "time_ms": 349.4893360000333,
+          "solved": true
+        },
+        {
+          "nodes": 5393,
+          "depth": 28,
+          "time_ms": 52.79968299998927,
+          "solved": true
+        },
+        {
+          "nodes": 756,
+          "depth": 26,
+          "time_ms": 6.789295999965361,
+          "solved": true
+        },
+        {
+          "nodes": 365,
+          "depth": 30,
+          "time_ms": 3.119233000006716,
+          "solved": true
+        },
+        {
+          "nodes": 17070,
+          "depth": 30,
+          "time_ms": 175.66817499994158,
+          "solved": true
+        },
+        {
+          "nodes": 16619,
+          "depth": 30,
+          "time_ms": 174.49796699997933,
+          "solved": true
+        },
+        {
+          "nodes": 3014,
+          "depth": 28,
+          "time_ms": 28.67016999994121,
+          "solved": true
+        },
+        {
+          "nodes": 5552,
+          "depth": 28,
+          "time_ms": 54.38953800000945,
+          "solved": true
+        },
+        {
+          "nodes": 32383,
+          "depth": 30,
+          "time_ms": 352.80442900000253,
+          "solved": true
+        },
+        {
+          "nodes": 91,
+          "depth": 22,
+          "time_ms": 0.836002000028202,
+          "solved": true
+        },
+        {
+          "nodes": 12672,
+          "depth": 30,
+          "time_ms": 129.84940000001188,
+          "solved": true
+        },
+        {
+          "nodes": 793,
+          "depth": 26,
+          "time_ms": 6.837817000018731,
+          "solved": true
+        },
+        {
+          "nodes": 3985,
+          "depth": 30,
+          "time_ms": 37.009551999972246,
+          "solved": true
+        },
+        {
+          "nodes": 2688,
+          "depth": 30,
+          "time_ms": 24.329666999960864,
+          "solved": true
+        },
+        {
+          "nodes": 1925,
+          "depth": 26,
+          "time_ms": 18.079979000049207,
+          "solved": true
+        },
+        {
+          "nodes": 6102,
+          "depth": 30,
+          "time_ms": 56.133529000021554,
+          "solved": true
+        },
+        {
+          "nodes": 175,
+          "depth": 20,
+          "time_ms": 1.602047999995193,
+          "solved": true
+        },
+        {
+          "nodes": 1070,
+          "depth": 28,
+          "time_ms": 9.37094099992919,
+          "solved": true
+        },
+        {
+          "nodes": 108,
+          "depth": 20,
+          "time_ms": 0.9945589999915683,
+          "solved": true
+        },
+        {
+          "nodes": 802,
+          "depth": 26,
+          "time_ms": 6.827229000009538,
+          "solved": true
+        },
+        {
+          "nodes": 178,
+          "depth": 20,
+          "time_ms": 1.5576700000110577,
+          "solved": true
+        },
+        {
+          "nodes": 34438,
+          "depth": 30,
+          "time_ms": 367.1382680000761,
+          "solved": true
+        },
+        {
+          "nodes": 2854,
+          "depth": 26,
+          "time_ms": 26.51947599997584,
+          "solved": true
+        },
+        {
+          "nodes": 403,
+          "depth": 20,
+          "time_ms": 3.4989719999884983,
+          "solved": true
+        },
+        {
+          "nodes": 891,
+          "depth": 28,
+          "time_ms": 7.706570999971518,
+          "solved": true
+        },
+        {
+          "nodes": 2566,
+          "depth": 26,
+          "time_ms": 23.480748999986645,
+          "solved": true
+        },
+        {
+          "nodes": 9522,
+          "depth": 28,
+          "time_ms": 94.44703999997728,
+          "solved": true
+        },
+        {
+          "nodes": 1268,
+          "depth": 26,
+          "time_ms": 11.566981999976633,
+          "solved": true
+        },
+        {
+          "nodes": 129,
+          "depth": 22,
+          "time_ms": 1.1106559999234378,
+          "solved": true
+        },
+        {
+          "nodes": 4317,
+          "depth": 28,
+          "time_ms": 40.249757000083264,
+          "solved": true
+        },
+        {
+          "nodes": 3640,
+          "depth": 24,
+          "time_ms": 33.566288999963945,
+          "solved": true
+        }
+      ],
+      "idastar": [
+        {
+          "nodes": 1392,
+          "depth": 22,
+          "time_ms": 10.406026999930873,
+          "solved": true
+        },
+        {
+          "nodes": 8179,
+          "depth": 26,
+          "time_ms": 62.207930999989,
+          "solved": true
+        },
+        {
+          "nodes": 1153,
+          "depth": 30,
+          "time_ms": 9.009772000013072,
+          "solved": true
+        },
+        {
+          "nodes": 51,
+          "depth": 30,
+          "time_ms": 0.3401700000722485,
+          "solved": true
+        },
+        {
+          "nodes": 7901,
+          "depth": 28,
+          "time_ms": 59.36602300005234,
+          "solved": true
+        },
+        {
+          "nodes": 4719,
+          "depth": 28,
+          "time_ms": 36.37747799996305,
+          "solved": true
+        },
+        {
+          "nodes": 18486,
+          "depth": 28,
+          "time_ms": 141.4238000000978,
+          "solved": true
+        },
+        {
+          "nodes": 24239,
+          "depth": 28,
+          "time_ms": 189.02733000004446,
+          "solved": true
+        },
+        {
+          "nodes": 4060,
+          "depth": 30,
+          "time_ms": 30.863057000033223,
+          "solved": true
+        },
+        {
+          "nodes": 7522,
+          "depth": 30,
+          "time_ms": 56.452261000004,
+          "solved": true
+        },
+        {
+          "nodes": 124,
+          "depth": 22,
+          "time_ms": 0.9315820000210806,
+          "solved": true
+        },
+        {
+          "nodes": 3358,
+          "depth": 26,
+          "time_ms": 28.758476999996674,
+          "solved": true
+        },
+        {
+          "nodes": 2056,
+          "depth": 24,
+          "time_ms": 21.01188800008913,
+          "solved": true
+        },
+        {
+          "nodes": 357,
+          "depth": 26,
+          "time_ms": 2.647986000056335,
+          "solved": true
+        },
+        {
+          "nodes": 4623,
+          "depth": 28,
+          "time_ms": 38.711356000021624,
+          "solved": true
+        },
+        {
+          "nodes": 15393,
+          "depth": 30,
+          "time_ms": 125.95181999995475,
+          "solved": true
+        },
+        {
+          "nodes": 6353,
+          "depth": 26,
+          "time_ms": 47.82610899997053,
+          "solved": true
+        },
+        {
+          "nodes": 169,
+          "depth": 24,
+          "time_ms": 2.2620949999918594,
+          "solved": true
+        },
+        {
+          "nodes": 769,
+          "depth": 20,
+          "time_ms": 5.8068050000201765,
+          "solved": true
+        },
+        {
+          "nodes": 67665,
+          "depth": 28,
+          "time_ms": 516.739914000027,
+          "solved": true
+        },
+        {
+          "nodes": 3022,
+          "depth": 28,
+          "time_ms": 22.767073999943932,
+          "solved": true
+        },
+        {
+          "nodes": 401,
+          "depth": 26,
+          "time_ms": 3.1042980000393072,
+          "solved": true
+        },
+        {
+          "nodes": 105,
+          "depth": 30,
+          "time_ms": 0.6540079999695081,
+          "solved": true
+        },
+        {
+          "nodes": 22653,
+          "depth": 30,
+          "time_ms": 168.09189999992213,
+          "solved": true
+        },
+        {
+          "nodes": 20071,
+          "depth": 30,
+          "time_ms": 149.52993300005346,
+          "solved": true
+        },
+        {
+          "nodes": 4377,
+          "depth": 28,
+          "time_ms": 33.71904599998743,
+          "solved": true
+        },
+        {
+          "nodes": 5631,
+          "depth": 28,
+          "time_ms": 43.20256599999084,
+          "solved": true
+        },
+        {
+          "nodes": 47056,
+          "depth": 30,
+          "time_ms": 397.67783399997825,
+          "solved": true
+        },
+        {
+          "nodes": 65,
+          "depth": 22,
+          "time_ms": 0.48835500001587206,
+          "solved": true
+        },
+        {
+          "nodes": 17051,
+          "depth": 30,
+          "time_ms": 128.3437800000229,
+          "solved": true
+        },
+        {
+          "nodes": 608,
+          "depth": 26,
+          "time_ms": 4.435639999996965,
+          "solved": true
+        },
+        {
+          "nodes": 5679,
+          "depth": 30,
+          "time_ms": 41.6072970000414,
+          "solved": true
+        },
+        {
+          "nodes": 3128,
+          "depth": 30,
+          "time_ms": 26.248060000057194,
+          "solved": true
+        },
+        {
+          "nodes": 2057,
+          "depth": 26,
+          "time_ms": 15.674091000050794,
+          "solved": true
+        },
+        {
+          "nodes": 10877,
+          "depth": 30,
+          "time_ms": 80.75811399999111,
+          "solved": true
+        },
+        {
+          "nodes": 183,
+          "depth": 20,
+          "time_ms": 1.3436369999908493,
+          "solved": true
+        },
+        {
+          "nodes": 1316,
+          "depth": 28,
+          "time_ms": 9.888317999980245,
+          "solved": true
+        },
+        {
+          "nodes": 95,
+          "depth": 20,
+          "time_ms": 0.7405229999903895,
+          "solved": true
+        },
+        {
+          "nodes": 946,
+          "depth": 26,
+          "time_ms": 6.98212899999362,
+          "solved": true
+        },
+        {
+          "nodes": 86,
+          "depth": 20,
+          "time_ms": 0.6534819999615138,
+          "solved": true
+        },
+        {
+          "nodes": 29527,
+          "depth": 30,
+          "time_ms": 226.28426099993248,
+          "solved": true
+        },
+        {
+          "nodes": 1457,
+          "depth": 26,
+          "time_ms": 11.0184320000144,
+          "solved": true
+        },
+        {
+          "nodes": 477,
+          "depth": 20,
+          "time_ms": 3.9864469999884022,
+          "solved": true
+        },
+        {
+          "nodes": 954,
+          "depth": 28,
+          "time_ms": 6.881229999976313,
+          "solved": true
+        },
+        {
+          "nodes": 2268,
+          "depth": 26,
+          "time_ms": 17.014621000043917,
+          "solved": true
+        },
+        {
+          "nodes": 17314,
+          "depth": 28,
+          "time_ms": 133.8291739999704,
+          "solved": true
+        },
+        {
+          "nodes": 850,
+          "depth": 26,
+          "time_ms": 6.5000810000128695,
+          "solved": true
+        },
+        {
+          "nodes": 85,
+          "depth": 22,
+          "time_ms": 0.5925309999383899,
+          "solved": true
+        },
+        {
+          "nodes": 2355,
+          "depth": 28,
+          "time_ms": 17.76756899994325,
+          "solved": true
+        },
+        {
+          "nodes": 4534,
+          "depth": 24,
+          "time_ms": 34.673869000016566,
+          "solved": true
+        }
+      ]
+    },
+    "linear": {
+      "astar": [
+        {
+          "nodes": 979,
+          "depth": 22,
+          "time_ms": 33.81006699999034,
+          "solved": true
+        },
+        {
+          "nodes": 3047,
+          "depth": 26,
+          "time_ms": 98.21218900003714,
+          "solved": true
+        },
+        {
+          "nodes": 779,
+          "depth": 30,
+          "time_ms": 22.430590999988453,
+          "solved": true
+        },
+        {
+          "nodes": 55,
+          "depth": 30,
+          "time_ms": 1.6588259999252841,
+          "solved": true
+        },
+        {
+          "nodes": 2532,
+          "depth": 28,
+          "time_ms": 82.94874699993215,
+          "solved": true
+        },
+        {
+          "nodes": 2202,
+          "depth": 28,
+          "time_ms": 91.95589000000837,
+          "solved": true
+        },
+        {
+          "nodes": 4415,
+          "depth": 28,
+          "time_ms": 165.76471700000184,
+          "solved": true
+        },
+        {
+          "nodes": 7524,
+          "depth": 28,
+          "time_ms": 243.0284900000288,
+          "solved": true
+        },
+        {
+          "nodes": 1757,
+          "depth": 30,
+          "time_ms": 51.82935000004818,
+          "solved": true
+        },
+        {
+          "nodes": 2976,
+          "depth": 30,
+          "time_ms": 85.76861200003805,
+          "solved": true
+        },
+        {
+          "nodes": 80,
+          "depth": 22,
+          "time_ms": 2.5717439999652925,
+          "solved": true
+        },
+        {
+          "nodes": 2197,
+          "depth": 26,
+          "time_ms": 65.98059399993872,
+          "solved": true
+        },
+        {
+          "nodes": 1121,
+          "depth": 24,
+          "time_ms": 35.406509999916125,
+          "solved": true
+        },
+        {
+          "nodes": 422,
+          "depth": 26,
+          "time_ms": 13.10905000002549,
+          "solved": true
+        },
+        {
+          "nodes": 1441,
+          "depth": 28,
+          "time_ms": 42.101967999997214,
+          "solved": true
+        },
+        {
+          "nodes": 7250,
+          "depth": 30,
+          "time_ms": 224.71479800003635,
+          "solved": true
+        },
+        {
+          "nodes": 1411,
+          "depth": 26,
+          "time_ms": 45.53634699993836,
+          "solved": true
+        },
+        {
+          "nodes": 151,
+          "depth": 24,
+          "time_ms": 4.81400500007112,
+          "solved": true
+        },
+        {
+          "nodes": 440,
+          "depth": 20,
+          "time_ms": 14.281827999980123,
+          "solved": true
+        },
+        {
+          "nodes": 10125,
+          "depth": 28,
+          "time_ms": 333.13219999990906,
+          "solved": true
+        },
+        {
+          "nodes": 2025,
+          "depth": 28,
+          "time_ms": 63.397195999982614,
+          "solved": true
+        },
+        {
+          "nodes": 492,
+          "depth": 26,
+          "time_ms": 14.808969000000616,
+          "solved": true
+        },
+        {
+          "nodes": 187,
+          "depth": 30,
+          "time_ms": 5.36798699999963,
+          "solved": true
+        },
+        {
+          "nodes": 4360,
+          "depth": 30,
+          "time_ms": 135.37979599993832,
+          "solved": true
+        },
+        {
+          "nodes": 7556,
+          "depth": 30,
+          "time_ms": 230.6443310000077,
+          "solved": true
+        },
+        {
+          "nodes": 1105,
+          "depth": 28,
+          "time_ms": 41.37905799996133,
+          "solved": true
+        },
+        {
+          "nodes": 2423,
+          "depth": 28,
+          "time_ms": 80.06473299997197,
+          "solved": true
+        },
+        {
+          "nodes": 14187,
+          "depth": 30,
+          "time_ms": 466.98359399999845,
+          "solved": true
+        },
+        {
+          "nodes": 65,
+          "depth": 22,
+          "time_ms": 3.7409010000146736,
+          "solved": true
+        },
+        {
+          "nodes": 3252,
+          "depth": 30,
+          "time_ms": 144.0966400000434,
+          "solved": true
+        },
+        {
+          "nodes": 182,
+          "depth": 26,
+          "time_ms": 6.229076000067835,
+          "solved": true
+        },
+        {
+          "nodes": 1450,
+          "depth": 30,
+          "time_ms": 45.101501999965876,
+          "solved": true
+        },
+        {
+          "nodes": 1236,
+          "depth": 30,
+          "time_ms": 37.01806799995211,
+          "solved": true
+        },
+        {
+          "nodes": 721,
+          "depth": 26,
+          "time_ms": 24.896365000017795,
+          "solved": true
+        },
+        {
+          "nodes": 3238,
+          "depth": 30,
+          "time_ms": 98.46711200009395,
+          "solved": true
+        },
+        {
+          "nodes": 73,
+          "depth": 20,
+          "time_ms": 2.6198840000688506,
+          "solved": true
+        },
+        {
+          "nodes": 387,
+          "depth": 28,
+          "time_ms": 11.847831000068254,
+          "solved": true
+        },
+        {
+          "nodes": 90,
+          "depth": 20,
+          "time_ms": 3.0732970000144633,
+          "solved": true
+        },
+        {
+          "nodes": 356,
+          "depth": 26,
+          "time_ms": 11.819016999993437,
+          "solved": true
+        },
+        {
+          "nodes": 115,
+          "depth": 20,
+          "time_ms": 3.928120000068702,
+          "solved": true
+        },
+        {
+          "nodes": 11483,
+          "depth": 30,
+          "time_ms": 427.7891550000277,
+          "solved": true
+        },
+        {
+          "nodes": 842,
+          "depth": 26,
+          "time_ms": 26.1180659999809,
+          "solved": true
+        },
+        {
+          "nodes": 228,
+          "depth": 20,
+          "time_ms": 7.717683999999281,
+          "solved": true
+        },
+        {
+          "nodes": 359,
+          "depth": 28,
+          "time_ms": 10.53169900001194,
+          "solved": true
+        },
+        {
+          "nodes": 1013,
+          "depth": 26,
+          "time_ms": 32.00333799998134,
+          "solved": true
+        },
+        {
+          "nodes": 4070,
+          "depth": 28,
+          "time_ms": 134.6034560000362,
+          "solved": true
+        },
+        {
+          "nodes": 620,
+          "depth": 26,
+          "time_ms": 18.885012000055212,
+          "solved": true
+        },
+        {
+          "nodes": 114,
+          "depth": 22,
+          "time_ms": 3.6680030000297847,
+          "solved": true
+        },
+        {
+          "nodes": 1867,
+          "depth": 28,
+          "time_ms": 60.03474900001038,
+          "solved": true
+        },
+        {
+          "nodes": 1416,
+          "depth": 24,
+          "time_ms": 48.18526000008205,
+          "solved": true
+        }
+      ],
+      "idastar": [
+        {
+          "nodes": 544,
+          "depth": 22,
+          "time_ms": 17.921143999956257,
+          "solved": true
+        },
+        {
+          "nodes": 2263,
+          "depth": 26,
+          "time_ms": 71.57781299997623,
+          "solved": true
+        },
+        {
+          "nodes": 548,
+          "depth": 30,
+          "time_ms": 16.44747299997107,
+          "solved": true
+        },
+        {
+          "nodes": 34,
+          "depth": 30,
+          "time_ms": 0.7903400000941474,
+          "solved": true
+        },
+        {
+          "nodes": 2366,
+          "depth": 28,
+          "time_ms": 90.27256599995326,
+          "solved": true
+        },
+        {
+          "nodes": 2060,
+          "depth": 28,
+          "time_ms": 69.74863299990375,
+          "solved": true
+        },
+        {
+          "nodes": 6392,
+          "depth": 28,
+          "time_ms": 205.6285950000074,
+          "solved": true
+        },
+        {
+          "nodes": 14189,
+          "depth": 28,
+          "time_ms": 457.78211100002864,
+          "solved": true
+        },
+        {
+          "nodes": 2075,
+          "depth": 30,
+          "time_ms": 58.098103000020274,
+          "solved": true
+        },
+        {
+          "nodes": 4225,
+          "depth": 30,
+          "time_ms": 116.23386300004768,
+          "solved": true
+        },
+        {
+          "nodes": 78,
+          "depth": 22,
+          "time_ms": 2.0884900000055495,
+          "solved": true
+        },
+        {
+          "nodes": 1928,
+          "depth": 26,
+          "time_ms": 56.701721999957044,
+          "solved": true
+        },
+        {
+          "nodes": 1217,
+          "depth": 24,
+          "time_ms": 39.17114399996535,
+          "solved": true
+        },
+        {
+          "nodes": 226,
+          "depth": 26,
+          "time_ms": 6.529277000026923,
+          "solved": true
+        },
+        {
+          "nodes": 1556,
+          "depth": 28,
+          "time_ms": 44.99695300000894,
+          "solved": true
+        },
+        {
+          "nodes": 4748,
+          "depth": 30,
+          "time_ms": 132.60079700000915,
+          "solved": true
+        },
+        {
+          "nodes": 1899,
+          "depth": 26,
+          "time_ms": 58.495483000001514,
+          "solved": true
+        },
+        {
+          "nodes": 110,
+          "depth": 24,
+          "time_ms": 2.963278000038372,
+          "solved": true
+        },
+        {
+          "nodes": 624,
+          "depth": 20,
+          "time_ms": 19.707980000021053,
+          "solved": true
+        },
+        {
+          "nodes": 18460,
+          "depth": 28,
+          "time_ms": 588.4390319999966,
+          "solved": true
+        },
+        {
+          "nodes": 1148,
+          "depth": 28,
+          "time_ms": 33.42086999998628,
+          "solved": true
+        },
+        {
+          "nodes": 304,
+          "depth": 26,
+          "time_ms": 8.667733000038425,
+          "solved": true
+        },
+        {
+          "nodes": 58,
+          "depth": 30,
+          "time_ms": 1.2891630000240184,
+          "solved": true
+        },
+        {
+          "nodes": 3894,
+          "depth": 30,
+          "time_ms": 119.0453310000521,
+          "solved": true
+        },
+        {
+          "nodes": 8719,
+          "depth": 30,
+          "time_ms": 297.0599039999797,
+          "solved": true
+        },
+        {
+          "nodes": 1364,
+          "depth": 28,
+          "time_ms": 38.9495460000262,
+          "solved": true
+        },
+        {
+          "nodes": 2355,
+          "depth": 28,
+          "time_ms": 76.99211800002104,
+          "solved": true
+        },
+        {
+          "nodes": 16008,
+          "depth": 30,
+          "time_ms": 510.41979700005413,
+          "solved": true
+        },
+        {
+          "nodes": 53,
+          "depth": 22,
+          "time_ms": 1.6908019999846147,
+          "solved": true
+        },
+        {
+          "nodes": 4017,
+          "depth": 30,
+          "time_ms": 124.30838699992819,
+          "solved": true
+        },
+        {
+          "nodes": 96,
+          "depth": 26,
+          "time_ms": 2.7844810000487996,
+          "solved": true
+        },
+        {
+          "nodes": 1836,
+          "depth": 30,
+          "time_ms": 53.74962799999139,
+          "solved": true
+        },
+        {
+          "nodes": 1465,
+          "depth": 30,
+          "time_ms": 39.26294899997629,
+          "solved": true
+        },
+        {
+          "nodes": 587,
+          "depth": 26,
+          "time_ms": 19.150051999986317,
+          "solved": true
+        },
+        {
+          "nodes": 5654,
+          "depth": 30,
+          "time_ms": 164.27107100003013,
+          "solved": true
+        },
+        {
+          "nodes": 65,
+          "depth": 20,
+          "time_ms": 2.0035129999769197,
+          "solved": true
+        },
+        {
+          "nodes": 381,
+          "depth": 28,
+          "time_ms": 10.710829000004196,
+          "solved": true
+        },
+        {
+          "nodes": 84,
+          "depth": 20,
+          "time_ms": 2.4484829999664726,
+          "solved": true
+        },
+        {
+          "nodes": 292,
+          "depth": 26,
+          "time_ms": 8.922048999920662,
+          "solved": true
+        },
+        {
+          "nodes": 56,
+          "depth": 20,
+          "time_ms": 2.040227999941635,
+          "solved": true
+        },
+        {
+          "nodes": 8284,
+          "depth": 30,
+          "time_ms": 262.91515699995216,
+          "solved": true
+        },
+        {
+          "nodes": 476,
+          "depth": 26,
+          "time_ms": 13.760317999981453,
+          "solved": true
+        },
+        {
+          "nodes": 300,
+          "depth": 20,
+          "time_ms": 10.160455999994156,
+          "solved": true
+        },
+        {
+          "nodes": 380,
+          "depth": 28,
+          "time_ms": 10.107402000016918,
+          "solved": true
+        },
+        {
+          "nodes": 914,
+          "depth": 26,
+          "time_ms": 27.101106999907643,
+          "solved": true
+        },
+        {
+          "nodes": 6454,
+          "depth": 28,
+          "time_ms": 206.1355130000493,
+          "solved": true
+        },
+        {
+          "nodes": 444,
+          "depth": 26,
+          "time_ms": 12.705110999945646,
+          "solved": true
+        },
+        {
+          "nodes": 73,
+          "depth": 22,
+          "time_ms": 2.1010400000704976,
+          "solved": true
+        },
+        {
+          "nodes": 1013,
+          "depth": 28,
+          "time_ms": 29.62614399996255,
+          "solved": true
+        },
+        {
+          "nodes": 1426,
+          "depth": 24,
+          "time_ms": 46.358233999967524,
+          "solved": true
+        }
+      ]
+    },
+    "pdb": {
+      "astar": [
+        {
+          "nodes": 221,
+          "depth": 22,
+          "time_ms": 4.014740000002348,
+          "solved": true
+        },
+        {
+          "nodes": 1459,
+          "depth": 26,
+          "time_ms": 26.734509999982947,
+          "solved": true
+        },
+        {
+          "nodes": 130,
+          "depth": 30,
+          "time_ms": 2.524945999994088,
+          "solved": true
+        },
+        {
+          "nodes": 45,
+          "depth": 30,
+          "time_ms": 0.9089679999760847,
+          "solved": true
+        },
+        {
+          "nodes": 1958,
+          "depth": 28,
+          "time_ms": 35.397569999986445,
+          "solved": true
+        },
+        {
+          "nodes": 983,
+          "depth": 28,
+          "time_ms": 17.524432999948658,
+          "solved": true
+        },
+        {
+          "nodes": 4215,
+          "depth": 28,
+          "time_ms": 80.28336899997157,
+          "solved": true
+        },
+        {
+          "nodes": 7559,
+          "depth": 28,
+          "time_ms": 145.46023399998376,
+          "solved": true
+        },
+        {
+          "nodes": 340,
+          "depth": 30,
+          "time_ms": 6.360444000051757,
+          "solved": true
+        },
+        {
+          "nodes": 508,
+          "depth": 30,
+          "time_ms": 8.84559199994328,
+          "solved": true
+        },
+        {
+          "nodes": 53,
+          "depth": 22,
+          "time_ms": 1.0287480000670257,
+          "solved": true
+        },
+        {
+          "nodes": 283,
+          "depth": 26,
+          "time_ms": 5.036501000063254,
+          "solved": true
+        },
+        {
+          "nodes": 716,
+          "depth": 24,
+          "time_ms": 12.054642000066451,
+          "solved": true
+        },
+        {
+          "nodes": 203,
+          "depth": 26,
+          "time_ms": 3.920652000033442,
+          "solved": true
+        },
+        {
+          "nodes": 840,
+          "depth": 28,
+          "time_ms": 15.410291999955916,
+          "solved": true
+        },
+        {
+          "nodes": 1941,
+          "depth": 30,
+          "time_ms": 37.423576999913166,
+          "solved": true
+        },
+        {
+          "nodes": 860,
+          "depth": 26,
+          "time_ms": 15.168913000024986,
+          "solved": true
+        },
+        {
+          "nodes": 49,
+          "depth": 24,
+          "time_ms": 0.9071350000340317,
+          "solved": true
+        },
+        {
+          "nodes": 284,
+          "depth": 20,
+          "time_ms": 4.8283630000014455,
+          "solved": true
+        },
+        {
+          "nodes": 4725,
+          "depth": 28,
+          "time_ms": 88.04507799993644,
+          "solved": true
+        },
+        {
+          "nodes": 1061,
+          "depth": 28,
+          "time_ms": 19.995829999970738,
+          "solved": true
+        },
+        {
+          "nodes": 164,
+          "depth": 26,
+          "time_ms": 3.0243339999742602,
+          "solved": true
+        },
+        {
+          "nodes": 166,
+          "depth": 30,
+          "time_ms": 2.8058830000645685,
+          "solved": true
+        },
+        {
+          "nodes": 1518,
+          "depth": 30,
+          "time_ms": 26.617834000035145,
+          "solved": true
+        },
+        {
+          "nodes": 1400,
+          "depth": 30,
+          "time_ms": 26.95330100004867,
+          "solved": true
+        },
+        {
+          "nodes": 74,
+          "depth": 28,
+          "time_ms": 1.4219910000292657,
+          "solved": true
+        },
+        {
+          "nodes": 801,
+          "depth": 28,
+          "time_ms": 15.452956999979506,
+          "solved": true
+        },
+        {
+          "nodes": 6490,
+          "depth": 30,
+          "time_ms": 123.69292999994741,
+          "solved": true
+        },
+        {
+          "nodes": 30,
+          "depth": 22,
+          "time_ms": 0.5853790000855952,
+          "solved": true
+        },
+        {
+          "nodes": 450,
+          "depth": 30,
+          "time_ms": 7.749386999989838,
+          "solved": true
+        },
+        {
+          "nodes": 30,
+          "depth": 26,
+          "time_ms": 0.6208819999073967,
+          "solved": true
+        },
+        {
+          "nodes": 742,
+          "depth": 30,
+          "time_ms": 13.350322999940545,
+          "solved": true
+        },
+        {
+          "nodes": 317,
+          "depth": 30,
+          "time_ms": 5.7266389999313105,
+          "solved": true
+        },
+        {
+          "nodes": 827,
+          "depth": 26,
+          "time_ms": 14.96193699995274,
+          "solved": true
+        },
+        {
+          "nodes": 637,
+          "depth": 30,
+          "time_ms": 11.09709100001055,
+          "solved": true
+        },
+        {
+          "nodes": 50,
+          "depth": 20,
+          "time_ms": 0.8928980000746378,
+          "solved": true
+        },
+        {
+          "nodes": 119,
+          "depth": 28,
+          "time_ms": 2.583448999985194,
+          "solved": true
+        },
+        {
+          "nodes": 73,
+          "depth": 20,
+          "time_ms": 1.3600080000060188,
+          "solved": true
+        },
+        {
+          "nodes": 39,
+          "depth": 26,
+          "time_ms": 0.716354000019237,
+          "solved": true
+        },
+        {
+          "nodes": 53,
+          "depth": 20,
+          "time_ms": 0.9609119999822724,
+          "solved": true
+        },
+        {
+          "nodes": 2328,
+          "depth": 30,
+          "time_ms": 43.215327000098114,
+          "solved": true
+        },
+        {
+          "nodes": 218,
+          "depth": 26,
+          "time_ms": 3.972999999973581,
+          "solved": true
+        },
+        {
+          "nodes": 60,
+          "depth": 20,
+          "time_ms": 1.149348000012651,
+          "solved": true
+        },
+        {
+          "nodes": 49,
+          "depth": 28,
+          "time_ms": 0.8877660000052856,
+          "solved": true
+        },
+        {
+          "nodes": 337,
+          "depth": 26,
+          "time_ms": 5.893750000041109,
+          "solved": true
+        },
+        {
+          "nodes": 2116,
+          "depth": 28,
+          "time_ms": 39.50327800009745,
+          "solved": true
+        },
+        {
+          "nodes": 275,
+          "depth": 26,
+          "time_ms": 4.996768000069096,
+          "solved": true
+        },
+        {
+          "nodes": 66,
+          "depth": 22,
+          "time_ms": 1.0296930000777138,
+          "solved": true
+        },
+        {
+          "nodes": 1872,
+          "depth": 28,
+          "time_ms": 35.4013969999869,
+          "solved": true
+        },
+        {
+          "nodes": 874,
+          "depth": 24,
+          "time_ms": 16.044567999983883,
+          "solved": true
+        }
+      ],
+      "idastar": [
+        {
+          "nodes": 88,
+          "depth": 22,
+          "time_ms": 1.2801880000097299,
+          "solved": true
+        },
+        {
+          "nodes": 1261,
+          "depth": 26,
+          "time_ms": 19.704980000028627,
+          "solved": true
+        },
+        {
+          "nodes": 76,
+          "depth": 30,
+          "time_ms": 1.0340500000438624,
+          "solved": true
+        },
+        {
+          "nodes": 36,
+          "depth": 30,
+          "time_ms": 0.46246900001278846,
+          "solved": true
+        },
+        {
+          "nodes": 2294,
+          "depth": 28,
+          "time_ms": 36.113744999966,
+          "solved": true
+        },
+        {
+          "nodes": 925,
+          "depth": 28,
+          "time_ms": 14.445152999996935,
+          "solved": true
+        },
+        {
+          "nodes": 7298,
+          "depth": 28,
+          "time_ms": 119.41584800001692,
+          "solved": true
+        },
+        {
+          "nodes": 15721,
+          "depth": 28,
+          "time_ms": 251.15103899997848,
+          "solved": true
+        },
+        {
+          "nodes": 257,
+          "depth": 30,
+          "time_ms": 4.05826500002604,
+          "solved": true
+        },
+        {
+          "nodes": 424,
+          "depth": 30,
+          "time_ms": 6.582093000019995,
+          "solved": true
+        },
+        {
+          "nodes": 53,
+          "depth": 22,
+          "time_ms": 0.764896000077897,
+          "solved": true
+        },
+        {
+          "nodes": 107,
+          "depth": 26,
+          "time_ms": 1.4524460000302497,
+          "solved": true
+        },
+        {
+          "nodes": 859,
+          "depth": 24,
+          "time_ms": 13.357556999949338,
+          "solved": true
+        },
+        {
+          "nodes": 103,
+          "depth": 26,
+          "time_ms": 1.7140080000217495,
+          "solved": true
+        },
+        {
+          "nodes": 1032,
+          "depth": 28,
+          "time_ms": 17.14840300007836,
+          "solved": true
+        },
+        {
+          "nodes": 1058,
+          "depth": 30,
+          "time_ms": 16.956025000013142,
+          "solved": true
+        },
+        {
+          "nodes": 1058,
+          "depth": 26,
+          "time_ms": 16.53448299998672,
+          "solved": true
+        },
+        {
+          "nodes": 40,
+          "depth": 24,
+          "time_ms": 0.5468849999488157,
+          "solved": true
+        },
+        {
+          "nodes": 409,
+          "depth": 20,
+          "time_ms": 6.200480000075004,
+          "solved": true
+        },
+        {
+          "nodes": 7482,
+          "depth": 28,
+          "time_ms": 119.6818800000301,
+          "solved": true
+        },
+        {
+          "nodes": 646,
+          "depth": 28,
+          "time_ms": 10.38371200002075,
+          "solved": true
+        },
+        {
+          "nodes": 87,
+          "depth": 26,
+          "time_ms": 1.376490999973612,
+          "solved": true
+        },
+        {
+          "nodes": 65,
+          "depth": 30,
+          "time_ms": 0.8518699999058299,
+          "solved": true
+        },
+        {
+          "nodes": 1291,
+          "depth": 30,
+          "time_ms": 20.103863000031197,
+          "solved": true
+        },
+        {
+          "nodes": 1119,
+          "depth": 30,
+          "time_ms": 18.262477000007493,
+          "solved": true
+        },
+        {
+          "nodes": 57,
+          "depth": 28,
+          "time_ms": 0.8398679999572778,
+          "solved": true
+        },
+        {
+          "nodes": 659,
+          "depth": 28,
+          "time_ms": 10.501404000024195,
+          "solved": true
+        },
+        {
+          "nodes": 5850,
+          "depth": 30,
+          "time_ms": 95.86917199999334,
+          "solved": true
+        },
+        {
+          "nodes": 27,
+          "depth": 22,
+          "time_ms": 0.34022500005903566,
+          "solved": true
+        },
+        {
+          "nodes": 423,
+          "depth": 30,
+          "time_ms": 6.186167000009846,
+          "solved": true
+        },
+        {
+          "nodes": 27,
+          "depth": 26,
+          "time_ms": 0.3322659999867028,
+          "solved": true
+        },
+        {
+          "nodes": 925,
+          "depth": 30,
+          "time_ms": 14.49543800003994,
+          "solved": true
+        },
+        {
+          "nodes": 369,
+          "depth": 30,
+          "time_ms": 5.631805000007262,
+          "solved": true
+        },
+        {
+          "nodes": 826,
+          "depth": 26,
+          "time_ms": 12.997370999983104,
+          "solved": true
+        },
+        {
+          "nodes": 865,
+          "depth": 30,
+          "time_ms": 13.928301000078136,
+          "solved": true
+        },
+        {
+          "nodes": 48,
+          "depth": 20,
+          "time_ms": 0.7136379999792553,
+          "solved": true
+        },
+        {
+          "nodes": 103,
+          "depth": 28,
+          "time_ms": 1.7200649999722373,
+          "solved": true
+        },
+        {
+          "nodes": 63,
+          "depth": 20,
+          "time_ms": 0.9187840000777214,
+          "solved": true
+        },
+        {
+          "nodes": 38,
+          "depth": 26,
+          "time_ms": 0.5059730000311902,
+          "solved": true
+        },
+        {
+          "nodes": 32,
+          "depth": 20,
+          "time_ms": 0.4201030000103856,
+          "solved": true
+        },
+        {
+          "nodes": 962,
+          "depth": 30,
+          "time_ms": 15.055660000030002,
+          "solved": true
+        },
+        {
+          "nodes": 176,
+          "depth": 26,
+          "time_ms": 2.723972000012509,
+          "solved": true
+        },
+        {
+          "nodes": 51,
+          "depth": 20,
+          "time_ms": 0.8168440000417831,
+          "solved": true
+        },
+        {
+          "nodes": 47,
+          "depth": 28,
+          "time_ms": 0.6917619999740054,
+          "solved": true
+        },
+        {
+          "nodes": 257,
+          "depth": 26,
+          "time_ms": 3.9148619999878065,
+          "solved": true
+        },
+        {
+          "nodes": 2314,
+          "depth": 28,
+          "time_ms": 37.29424699997708,
+          "solved": true
+        },
+        {
+          "nodes": 151,
+          "depth": 26,
+          "time_ms": 2.1902339999542164,
+          "solved": true
+        },
+        {
+          "nodes": 23,
+          "depth": 22,
+          "time_ms": 0.29925499995897553,
+          "solved": true
+        },
+        {
+          "nodes": 1078,
+          "depth": 28,
+          "time_ms": 17.370219000099496,
+          "solved": true
+        },
+        {
+          "nodes": 697,
+          "depth": 24,
+          "time_ms": 11.563786000010623,
+          "solved": true
+        }
+      ]
+    }
+  }
+}
