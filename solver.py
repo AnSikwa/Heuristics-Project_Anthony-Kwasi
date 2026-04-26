@@ -249,6 +249,7 @@ def idastar(start: tuple, n: int,
         heuristic = manhattan_distance
     goal = goal_state(n)
     counter = [0]
+    found_depth = [-1]
 
     def search(path: list, g: int, bound: int) -> int:
         state = path[-1]
@@ -257,6 +258,7 @@ def idastar(start: tuple, n: int,
         if f > bound:
             return f
         if state == goal:
+            found_depth[0] = g
             return -1
         counter[0] += 1
         if counter[0] > max_nodes:
@@ -283,7 +285,7 @@ def idastar(start: tuple, n: int,
         t = search(path, 0, bound)
         if t == -1:
             return {"nodes_expanded": counter[0],
-                    "depth": len(path) - 1, "found": True}
+                    "depth": found_depth[0], "found": True}
         if t == -2 or t == math.inf:
             return {"nodes_expanded": counter[0], "depth": -1,
                     "found": False}
